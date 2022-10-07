@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace属性：用于指定当的映射文件和那个接口进行映射，需要指定接口的文件路径，需要标注包的完整路径-->
+<mapper namespace="com.example.store.mapper.UserMapper">
+    <resultMap id="UserEntityMap" type="com.example.store.entity.User">
+        <id column="uid" property="uid"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="created_user" property="createdUser"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_user" property="modifiedUser"/>
+        <result column="modified_time" property="modifiedTime"/>
+    </resultMap>
+
+    <!--id属性：表示映射接口中方法的名称，直接在标签的内部来编写SQL语句-->
+    <insert id="insert">
+        insert into t_user (username, password, salt, phone, email, gender, avatar, is_delete,
+                            created_user, created_time, modified_user, modified_time)
+        values (#{username}, #{password}, #{salt}, #{phone}, #{email}, #{gender}, #{avatar}, #{isDelete},
+                #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime})
+
+    </insert>
+
+    <select id="findByUsername" resultMap="UserEntityMap">
+        select *
+        from t_user
+        where username = #{username}
+    </select>
+
+    <update id="updatePasswordByUid">
+        update t_user
+        set password      = #{password},
+            modified_user = #{modifiedUser},
+            modified_time = #{modifiedTime}
+        where uid = ${uid}
+    </update>
+
+    <select id="findByUid" resultMap="UserEntityMap">
+        select *
+        from t_user
+        where uid = #{uid}
+    </select>
+
+    <update id="updateInfoByUid">
+        update t_user
+        set
+        <!--if表示条件标签，test接收的是一个返回值为Boolean类型的条件，如果test的条件的结果为true则执行if标签内部的语句-->
+        <if test="phone!=null">phone = #{phone},</if>
+        <if test="email!=null">email = #{email},</if>
+        <if test="gender!=null">gender = #{gender},</if>
+        modified_user = #{modifiedUser},
+        modified_time = #{modifiedTime}
+        where uid = ${uid}
+    </update>
+</mapper>
