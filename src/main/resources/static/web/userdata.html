@@ -268,6 +268,26 @@
 <!--页脚结束-->
 
 <script type="text/javascript">
+    $("#btn-change-info").click(function () {
+        $.ajax({
+            url: "/users/change_info",
+            type: "get",
+            data: $("#form-change-info").serialize(),
+            dataType: "json",
+            success: function (json) {
+                if (json.state == 200) {
+                    alert("用户修改成功");
+                    location.href = "userdata.html";
+                } else {
+                    alert("用户信息修改失败");
+                }
+            },
+            error: function (xhr) {
+                alert("用户信息修改时产生未知的错误" + xhr.status);
+            }
+        });
+    });
+
     $(document).ready(function () {
         $.ajax({
             url: "/users/get_by_uid",
@@ -292,7 +312,6 @@
             }
         });
     });
-
 </script>
 </body>
 
