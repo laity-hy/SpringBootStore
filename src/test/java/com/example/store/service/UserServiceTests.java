@@ -54,6 +54,11 @@ public class UserServiceTests {
         user.setPhone("15673711635");
         user.setEmail("1810638451@qq.com");
         user.setGender(0);
-        userService.changeInfo(12,"管理员",user);
+        userService.changeInfo(12, "管理员", user);
+    }
+
+    @Test
+    public void changeAvatar() {
+        userService.changeAvatar(12, "/upload/test.png", "管理员");
     }
 }
