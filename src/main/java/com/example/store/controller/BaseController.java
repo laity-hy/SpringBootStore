@@ -1,5 +1,6 @@
 package com.example.store.controller;
 
+import com.example.store.controller.exception.*;
 import com.example.store.service.exception.*;
 import com.example.store.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,7 +22,7 @@ public class BaseController {
     @ExceptionHandler(ServiceException.class) //用于统一处理抛出的异常
     public JsonResult<Void> handleException(Throwable e) {
         JsonResult<Void> result = new JsonResult<>(e);
-        if (e instanceof UsernameDuplicatedException) {
+        if (e instanceof UsernameDuplicatedException) {     //4000异常
             result.setState(4000);
             result.setMessage("用户名被占用的异常");
         } else if (e instanceof UserNotFoundException) {
@@ -30,12 +31,22 @@ public class BaseController {
         } else if (e instanceof PasswordNotMatchException) {
             result.setState(4002);
             result.setMessage("用户名的密码错误的异常");
-        } else if (e instanceof InsertException) {
+        } else if (e instanceof InsertException) {          //5000异常
             result.setState(5000);
             result.setMessage("插入数据时产生未知的异常");
         } else if (e instanceof UpdateException) {
             result.setState(5001);
             result.setMessage("更新数据时产生未知的异常");
+        } else if (e instanceof FileEmptyException) {       //6000异常
+            result.setState(6000);
+        } else if (e instanceof FileSizeException) {
+            result.setState(6001);
+        } else if (e instanceof FileTypeException) {
+            result.setState(6002);
+        } else if (e instanceof FileStateException) {
+            result.setState(6003);
+        } else if (e instanceof FileUploadIOException) {
+            result.setState(6004);
         }
         return result;
     }
