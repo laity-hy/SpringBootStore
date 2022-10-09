@@ -20,7 +20,7 @@ public class Address extends BaseEntity {
     private String phone;
     private String tel;
     private String tag;
-    private Integer isDelete;
+    private Integer isDefault;
 
     public Integer getAid() {
         return aid;
@@ -134,12 +134,12 @@ public class Address extends BaseEntity {
         this.tag = tag;
     }
 
-    public Integer getIsDelete() {
-        return isDelete;
+    public Integer getIsDefault() {
+        return isDefault;
     }
 
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
+    public void setIsDefault(Integer isDefault) {
+        this.isDefault = isDefault;
     }
 
     @Override
@@ -147,12 +147,12 @@ public class Address extends BaseEntity {
         if (this == o) return true;
         if (!(o instanceof Address address1)) return false;
         if (!super.equals(o)) return false;
-        return Objects.equals(getAid(), address1.getAid()) && Objects.equals(getUid(), address1.getUid()) && Objects.equals(getName(), address1.getName()) && Objects.equals(getProvinceName(), address1.getProvinceName()) && Objects.equals(getProvinceCode(), address1.getProvinceCode()) && Objects.equals(getCityName(), address1.getCityName()) && Objects.equals(getCityCode(), address1.getCityCode()) && Objects.equals(getAreaName(), address1.getAreaName()) && Objects.equals(getAreaCode(), address1.getAreaCode()) && Objects.equals(getZip(), address1.getZip()) && Objects.equals(getAddress(), address1.getAddress()) && Objects.equals(getPhone(), address1.getPhone()) && Objects.equals(getTel(), address1.getTel()) && Objects.equals(getTag(), address1.getTag()) && Objects.equals(getIsDelete(), address1.getIsDelete());
+        return Objects.equals(getAid(), address1.getAid()) && Objects.equals(getUid(), address1.getUid()) && Objects.equals(getName(), address1.getName()) && Objects.equals(getProvinceName(), address1.getProvinceName()) && Objects.equals(getProvinceCode(), address1.getProvinceCode()) && Objects.equals(getCityName(), address1.getCityName()) && Objects.equals(getCityCode(), address1.getCityCode()) && Objects.equals(getAreaName(), address1.getAreaName()) && Objects.equals(getAreaCode(), address1.getAreaCode()) && Objects.equals(getZip(), address1.getZip()) && Objects.equals(getAddress(), address1.getAddress()) && Objects.equals(getPhone(), address1.getPhone()) && Objects.equals(getTel(), address1.getTel()) && Objects.equals(getTag(), address1.getTag()) && Objects.equals(getIsDefault(), address1.getIsDefault());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getAid(), getUid(), getName(), getProvinceName(), getProvinceCode(), getCityName(), getCityCode(), getAreaName(), getAreaCode(), getZip(), getAddress(), getPhone(), getTel(), getTag(), getIsDelete());
+        return Objects.hash(super.hashCode(), getAid(), getUid(), getName(), getProvinceName(), getProvinceCode(), getCityName(), getCityCode(), getAreaName(), getAreaCode(), getZip(), getAddress(), getPhone(), getTel(), getTag(), getIsDefault());
     }
 
     @Override
@@ -172,7 +172,7 @@ public class Address extends BaseEntity {
                 ", phone='" + phone + '\'' +
                 ", tel='" + tel + '\'' +
                 ", tag='" + tag + '\'' +
-                ", isDelete=" + isDelete +
+                ", isDefault=" + isDefault +
                 '}';
     }
 }
