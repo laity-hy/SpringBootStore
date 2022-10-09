@@ -158,6 +158,7 @@
                     //跳转到系统的主页index.html
                     //相对路径来确定跳转的页面
                     location.href = "index.html";
+                    $.cookie("avatar", json.data.avatar, {expires: 1});
                 } else {
                     alert("登陆失败");
                 }
