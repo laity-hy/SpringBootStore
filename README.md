@@ -93,3 +93,48 @@ user.address.max-count: 20
         addressService.addNewAddress(12, "管理员", address);   
 ```
 
+## 5新增收货地址-控制器
+
+### 5.1 处理异常
+
+业务层抛出了业务层收货地址总数超标的异常，在BaseController中进行处理
+
+```
+else if (e instanceof AddressCountLimitException) {
+           result.setState(4003);
+           result.setMessage("用户的收货地址超出上线的异常");
+       }
+```    
+
+### 5.2 设计请求
+
+```
+/addresses/add_new_address
+post
+Address address ,HttpSession session
+JsonResult<Void>
+```
+
+### 5.3 处理请求
+
+在控制层创建AddressController来处理用户收货地址的请求和响应
+
+````java
+
+@RequestMapping("/addresses")
+@RestController
+public class AddressController extends BaseController {
+    @Autowired
+    private IAddressService addressService;
+
+    @RequestMapping("/add_new_address")
+    public JsonResult<Void> addNewAddress(Address address, HttpSession session) {
+        addressService.addNewAddress(getUidFromSession(session), getUsernameFromSession(session), address);
+        return new JsonResult<>(OK);
+    }
+}
+
+````
+
+先登录用户，然后访问测试。
+
