@@ -14,3 +14,6 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+
+# Spring读取配置文件中数据
+user.address.max-count: 20
