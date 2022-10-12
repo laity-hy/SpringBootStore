@@ -139,3 +139,32 @@ public class AddressController extends BaseController {
 先登录用户，然后访问测试。
 
 ## 新增用户地址-前端页面
+
+```javascript
+
+<script>
+    $("#btn-add-new-address").click(function () {
+    $.ajax({
+        url: "/addresses/add_new_address",
+        type: "post",
+        data: $("#form-add-new-address").serialize(),
+        dataType: "json",
+        success: function (json) {
+            if (json.state == 200) {
+                alert("新增收货地址成功");
+            } else {
+                alert("新增收货地址失败");
+            }
+        },
+        error: function (xhr) {
+            alert("新增收货地址时产生未知的错误" + xhr.status);
+        }
+    });
+});
+</script>
+
+```
+
+## 获取省市区列表
+
+### 1 获取省市区
