@@ -1,12 +1,14 @@
 package com.example.store.mapper;
 
 import com.example.store.entity.District;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
  * 处理省市区数据的持久层接口
  */
+//@Mapper
 public interface DistrictMapper {
     /**
      * 获取全国所有省/某省所有市/某市所有区

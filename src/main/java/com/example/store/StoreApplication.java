@@ -10,7 +10,6 @@ import org.springframework.util.unit.DataUnit;
 
 import javax.servlet.MultipartConfigElement;
 
-//@Configuration//表示这是一个配置类
 @SpringBootApplication
 //MapperScan注解指定当前项目中的Mapper接口路径的位置，在项目启动的时候加载所有的接口文件
 @MapperScan("com.example.store.mapper")

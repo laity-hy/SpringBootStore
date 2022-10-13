@@ -4,10 +4,10 @@ import com.example.store.entity.User;
 import com.example.store.mapper.UserMapper;
 import com.example.store.service.IUserService;
 import com.example.store.service.exception.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 @Service
 public class UserServiceImpl implements IUserService {
-    @Autowired(required = false)
+    @Resource
     private UserMapper userMapper;
 
     @Override

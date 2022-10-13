@@ -1,13 +1,14 @@
 package com.example.store.mapper;
 
 import com.example.store.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
 
 /**
  * 用户模块的持久层接口
  */
-
+//@Mapper
 public interface UserMapper {
     /**
      * 插入用户数据

@@ -5,6 +5,7 @@ import com.example.store.entity.Address;
 /**
  * 收货地址持久层接口
  */
+//@Mapper
 public interface AddressMapper {
     /**
      * 插入用户的收获地址数据

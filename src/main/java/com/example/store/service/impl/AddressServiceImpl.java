@@ -5,10 +5,10 @@ import com.example.store.mapper.AddressMapper;
 import com.example.store.service.IAddressService;
 import com.example.store.service.exception.AddressCountLimitException;
 import com.example.store.service.exception.InsertException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Date;
  */
 @Service
 public class AddressServiceImpl implements IAddressService {
-    @Autowired(required = false)
+    @Resource
     private AddressMapper addressMapper;
     @Value("${user.address.max-count}")
     private Integer maxCount;
