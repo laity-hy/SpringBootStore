@@ -18,11 +18,16 @@ public class DistrictServiceImpl implements IDistrictService {
 
     @Override
     public List<District> getByParent(String parent) {
-        return null;
+        List<District> list = districtMapper.findByParent(parent);
+        for (District district : list) {
+            district.setId(null);
+            district.setParent(null);
+        }
+        return list;
     }
 
     @Override
     public String getNameByCode(String code) {
-        return null;
+        return districtMapper.findNameByCode(code);
     }
 }
