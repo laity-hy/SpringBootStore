@@ -19,8 +19,6 @@
     <link rel="stylesheet" type="text/css" href="../css/layout.css"/>
     <link rel="stylesheet" type="text/css" href="../css/top.css"/>
     <link rel="stylesheet" type="text/css" href="../css/footer.css"/>
-    <script type="text/javascript" src="../js/distpicker.data.js"></script>
-    <script type="text/javascript" src="../js/distpicker.js"></script>
 </head>
 
 <body>
@@ -297,6 +295,100 @@
 <!--页脚结束-->
 
 <script>
+    let defaultOption = "<option value='0'>---- 请选择 ----</option>";
+
+    $(document).ready(function () {
+        showProvinceList();
+        $("#city-list").append(defaultOption);
+        $("#area-list").append(defaultOption);
+    });
+
+    $("#province-list").change(function () {
+        showCityList();
+    })
+
+    $("#city-list").change(function () {
+        showAreaList();
+    })
+
+    function showProvinceList() {
+        $("#province-list").append(defaultOption);
+        $.ajax({
+            url: "/districts",
+            type: "get",
+            data: "parent=86",
+            dataType: "json",
+            success: function (json) {
+                if (json.state == 200) {
+                    let list = json.data;
+                    console.log("count = " + list.length);
+                    for (let i = 0; i < list.length; i++) {
+                        console.log(list[i].name);
+                        let option = "<option value='" + list[i].code + "'>" + list[i].name + "</option>";
+                        $("#province-list").append(option);
+                    }
+                }
+            }
+        });
+    }
+
+    function showCityList() {
+        let parent = $("#province-list").val();
+        $("#city-list").empty();
+        $("#area-list").empty();
+
+        $("#city-list").append(defaultOption);
+        $("#area-list").append(defaultOption);
+
+        if (parent == 0) {
+            return;
+        }
+        $.ajax({
+            url: "/districts",
+            type: "get",
+            data: "parent=" + parent,
+            dataType: "json",
+            success: function (json) {
+                if (json.state == 200) {
+                    let list = json.data;
+                    console.log("count=" + list.length);
+                    for (let i = 0; i < list.length; i++) {
+                        console.log(list[i].name);
+                        let option = '<option value="' + list[i].code + '">' + list[i].name + '</option>';
+                        $("#city-list").append(option);
+                    }
+                }
+            }
+        })
+    }
+
+    function showAreaList() {
+        let parent = $("#city-list").val();
+        $("#area-list").empty();
+        $("#area-list").append(defaultOption);
+
+        if (parent == 0) {
+            return;
+        }
+        $.ajax({
+            url: "/districts",
+            type: "get",
+            data: "parent=" + parent,
+            dataType: "json",
+            success: function (json) {
+                if (json.state == 200) {
+                    let list = json.data;
+                    console.log("count=" + list.length);
+                    for (let i = 0; i < list.length; i++) {
+                        console.log(list[i].name);
+                        let option = '<option value="' + list[i].code + '">' + list[i].name + '</option>';
+                        $("#area-list").append(option);
+                    }
+                }
+            }
+        })
+    }
+
     $("#btn-add-new-address").click(function () {
         $.ajax({
             url: "/addresses/add_new_address",
@@ -307,11 +399,12 @@
                 if (json.state == 200) {
                     alert("新增收货地址成功");
                 } else {
-                    alert("新增收货地址失败");
+                    alert("新增收货地址失败" + json.message);
                 }
             },
             error: function (xhr) {
-                alert("新增收货地址时产生未知的错误" + xhr.status);
+                alert("您的登陆信息已经国企，请重新登陆！HTTP响应码：" + xhr.status);
+                location.href = "login.html";
             }
         });
     });

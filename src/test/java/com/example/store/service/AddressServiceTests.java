@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -21,5 +21,13 @@ public class AddressServiceTests {
         address.setPhone("123456789");
         address.setName("男朋友");
         addressService.addNewAddress(12, "管理员", address);
+    }
+
+    @Test
+    public void getByUid() {
+        List<Address> result = addressService.getByUid(12);
+        for (Address address : result) {
+            System.out.println(address);
+        }
     }
 }

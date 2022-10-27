@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 新增地址的实现类
@@ -44,5 +45,36 @@ public class AddressServiceImpl implements IAddressService {
         if (rows != 1) {
             throw new InsertException("插入用户的收货地址产生未知异常");
         }
+    }
+
+    @Override
+    public List<Address> getByUid(Integer uid) {
+        List<Address> list = addressMapper.findByUid(uid);
+        for (Address address : list) {
+            address.setUid(null);
+            address.setProvinceCode(null);
+            address.setCityCode(null);
+            address.setAreaCode(null);
+            address.setCreatedUser(null);
+            address.setCreatedTime(null);
+            address.setModifiedUser(null);
+            address.setModifiedTime(null);
+        }
+        return list;
+    }
+
+    @Override
+    public void setDefault(Integer uid, String username, Integer aid) {
+
+    }
+
+    @Override
+    public void delete(Integer aid, Integer uid, Integer username) {
+
+    }
+
+    @Override
+    public Address getByAid(Integer aid, Integer uid) {
+        return null;
     }
 }
