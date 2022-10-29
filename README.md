@@ -78,7 +78,7 @@ public class AddressServiceImpl implements IAddressService {
 ```yaml
 # Spring读取配置文件中数据
 user.address.max-count: 20
-```       
+```
 
 在实现类中显示业务控制
 
@@ -104,7 +104,7 @@ else if (e instanceof AddressCountLimitException) {
            result.setState(4003);
            result.setMessage("用户的收货地址超出上线的异常");
        }
-```    
+```
 
 ### 5.2 设计请求
 
